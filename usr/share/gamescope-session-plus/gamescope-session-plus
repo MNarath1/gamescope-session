@@ -331,7 +331,13 @@ if [ -n "$STEAMCMD" ]; then
 fi
 
 # Start client application
-$CLIENTCMD
+# This is started with switcheroo to match KDE & GNOME behavior for apps with UseAlternativeGPU specified in their desktop file - such as Steam.
+# Switcheroo will add necessary environment arguments to ensure the dGPU on the system is used, if applicable.
+if command -v /usr/bin/switcherooctl >/dev/null; then
+  switcherooctl launch $CLIENTCMD
+else
+  $CLIENTCMD
+fi
 
 if [[ "$SECONDS" -lt "$short_session_duration" ]]; then
 	echo "${CLIENT} failed" >>"$short_session_tracker_file"
