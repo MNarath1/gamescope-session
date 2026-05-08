@@ -263,6 +263,7 @@ fi
 # Add socket and stats read
 GAMESCOPECMD+=" -R $socket -T $stats"
 
+GAMESCOPECMD+=" --cursor-scale-height 1080"
 # Add custom vulkan adapter if specified
 if [ -n "$VULKAN_ADAPTER" ]; then
 	GAMESCOPECMD+=" --prefer-vk-device $VULKAN_ADAPTER"
