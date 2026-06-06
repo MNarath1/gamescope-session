@@ -1,13 +1,12 @@
 Name:           gamescope-session
-Version:        {{{ git_dir_version }}}
+Version:        1.0
 Release:        1%{?dist}
 Summary:        Gamescope session plus based on Valve's gamescope
 
 License:        MIT
 URL:            https://github.com/MNarath1/gamescope-session
 
-VCS:            {{{ git_dir_vcs }}}
-Source:        	{{{ git_dir_pack }}}
+Source:        	https://github.com/MNarath1/gamescope-session/archive/refs/tags/1.0.tar.gz
 BuildArch:      noarch
 
 Requires:       gamescope
@@ -20,11 +19,8 @@ BuildRequires:  systemd-rpm-macros
 %description
 Gamescope session plus based on Valve's gamescope
 
-# Disable debug packages
-%define debug_package %{nil}
-
 %prep
-{{{ git_dir_setup_macro }}}
+%autosetup
 
 %build
 
@@ -56,8 +52,4 @@ cp -v usr/lib/systemd/user/* %{buildroot}%{_userunitdir}
 %{_datadir}/gamescope-session-plus/gamescope-session-plus
 %{_userunitdir}/gamescope-session-plus@.service
 %{_userunitdir}/gamescope-session.target
-
-# Finally, changes from the latest release of your application are generated from
-# your project's Git history. It will be empty until you make first annotated Git tag.
-%changelog
-{{{ git_dir_changelog }}}
+%{_datadir}/gamescope/scripts/50-custom/50-disable-explicit-sync.lua
