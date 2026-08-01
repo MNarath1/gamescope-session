@@ -331,12 +331,11 @@ if [ -n "$STEAMCMD" ]; then
 fi
 
 # Start client application
-# This is started with switcheroo to match KDE & GNOME behavior for apps with UseAlternativeGPU specified in their desktop file - such as Steam.
-# Switcheroo will add necessary environment arguments to ensure the dGPU on the system is used, if applicable.
+# This is started with cardwire or switcheroo to match KDE & GNOME behavior for apps with UseAlternativeGPU specified in their desktop file - such as Steam.
 if command -v /usr/bin/switcherooctl >/dev/null; then
   /usr/bin/switcherooctl launch $CLIENTCMD
 else
-  $CLIENTCMD
+  env CARDWIRE_FORCE_DGPU=1 $CLIENTCMD
 fi
 
 if [[ "$SECONDS" -lt "$short_session_duration" ]]; then
