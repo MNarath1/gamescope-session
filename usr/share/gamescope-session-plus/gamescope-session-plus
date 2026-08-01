@@ -335,7 +335,7 @@ fi
 if command -v /usr/bin/switcherooctl >/dev/null; then
   /usr/bin/switcherooctl launch $CLIENTCMD
 else
-  CARDWIRE_FORCE_DGPU=1 $CLIENTCMD
+  env CARDWIRE_FORCE_DGPU=1 $CLIENTCMD
 fi
 
 if [[ "$SECONDS" -lt "$short_session_duration" ]]; then
