@@ -30,7 +30,6 @@ fi
 OXP_X1_LIST="ONEXPLAYER X1 i"
 if [[ ":$OXP_X1_LIST:" =~ ":$SYS_ID:"  ]]; then
   PANEL_TYPE=internal
-  USE_ROTATION_SHADER=1
   ORIENTATION=left
   CUSTOM_REFRESH_RATES=60,120
 
@@ -62,8 +61,6 @@ fi
 # OXP G1 Devices
 if [[ ":$SYS_ID:" =~ :ONEXPLAYER\ G1\ (A|i): ]]; then
   PANEL_TYPE=internal
-  # AMD version has hardware rotation
-  [[ ":$SYS_ID:" =~ ":ONEXPLAYER G1 i:" ]] && USE_ROTATION_SHADER=1
   ORIENTATION=left
   CUSTOM_REFRESH_RATES=60,144
 
