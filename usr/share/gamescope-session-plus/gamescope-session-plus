@@ -227,6 +227,11 @@ if [ -z "$GAMESCOPECMD" ]; then
 		MAX_SCALE_OPTION="--max-scale $MAX_SCALE"
 	fi
 
+	FAKE_OUTPUT_MM_OPTION=""
+	if [ -n "$FAKE_OUTPUT_MM" ] && gamescope_has_option "--fake-output-mm"; then
+		FAKE_OUTPUT_MM_OPTION="--fake-output-mm $FAKE_OUTPUT_MM"
+	fi
+
 	HDR_OPTIONS=""
 	if [ "$ENABLE_GAMESCOPE_HDR" == "1" ] && [ "$ENABLE_GAMESCOPE_WSI" == "1" ] && gamescope_has_option "--hdr-enabled" && gamescope_has_option "--hdr-itm-enable"; then
 		HDR_OPTIONS="--hdr-enabled --hdr-itm-enable"
@@ -252,6 +257,7 @@ if [ -z "$GAMESCOPECMD" ]; then
 		$BACKEND_OPTION \
 		$HDR_OPTIONS \
 		$MAX_SCALE_OPTION \
+		$FAKE_OUTPUT_MM_OPTION \
 		--prefer-output $OUTPUT_CONNECTOR \
 		--xwayland-count $XWAYLAND_COUNT \
 		--default-touch-mode $TOUCH_MODE \
