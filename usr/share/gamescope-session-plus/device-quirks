@@ -324,3 +324,12 @@ if [[ ":KONKR Pocket FIT Elite:" =~ ":$SYS_ID:" ]]; then
 
   export STEAM_DISPLAY_REFRESH_LIMITS=60,90,120,144
 fi
+
+if [[ ":KONKR Pocket FIT:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=right
+  CUSTOM_REFRESH_RATES=144
+  OUTPUT_CONNECTOR='*,DSI-1'
+  FAKE_OUTPUT_MM=177x100
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=144
+fi
