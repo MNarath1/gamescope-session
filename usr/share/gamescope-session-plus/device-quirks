@@ -1,7 +1,7 @@
 # This file will be sourced by gamescope-session script if not
 # overridden in ~/.config/environment.d
 
-SYS_ID="$(cat /sys/devices/virtual/dmi/id/product_name)"
+SYS_ID="$(cat /sys/devices/virtual/dmi/id/product_name || tr -d '\0' </sys/firmware/devicetree/base/model)"
 CPU_VENDOR="$(lscpu | grep "Vendor ID" | cut -d : -f 2 | xargs)"
 
 # OXP 60Hz Devices
@@ -237,3 +237,12 @@ if [ -f "$xg_mobile_file_path" ]; then
     fi
   fi
 fi
+
+if [[ ":AYANEO Pocket ACE:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=right
+  CUSTOM_REFRESH_RATES=60
+  OUTPUT_CONNECTOR='*,DSI-1'
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60
+fi
+
