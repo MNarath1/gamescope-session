@@ -351,3 +351,12 @@ if [[ ":Retroid Pocket 6:Retroid Pocket 6 TOP-DPAD:" =~ ":$SYS_ID:" ]]; then
 
   export STEAM_DISPLAY_REFRESH_LIMITS=60,120
 fi
+
+if [[ ":Retroid Pocket Mini:Retroid Pocket Mini V2:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=right
+  CUSTOM_REFRESH_RATES=60
+  OUTPUT_CONNECTOR='*,DSI-1'
+  FAKE_OUTPUT_MM=65x75
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60
+fi
