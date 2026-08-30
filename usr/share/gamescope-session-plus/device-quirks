@@ -254,3 +254,12 @@ if [[ ":AYANEO Pocket DMG:" =~ ":$SYS_ID:" ]]; then
 
   export STEAM_DISPLAY_REFRESH_LIMITS=60
 fi
+
+if [[ ":AYANEO Pocket DS:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=left
+  CUSTOM_REFRESH_RATES=60,120
+  # Prefer top screen
+  OUTPUT_CONNECTOR='*,DSI-1,DSI-2'
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60,120
+fi
