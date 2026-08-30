@@ -360,3 +360,11 @@ if [[ ":Retroid Pocket Mini:Retroid Pocket Mini V2:" =~ ":$SYS_ID:" ]]; then
 
   export STEAM_DISPLAY_REFRESH_LIMITS=60
 fi
+
+if [[ ":Retroid Pocket Nova:" =~ ":$SYS_ID:" ]]; then
+  OUTPUT_CONNECTOR='*,DSI-1'
+  CUSTOM_REFRESH_RATES=60,120
+  FAKE_OUTPUT_MM=177x100
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60,120
+fi
