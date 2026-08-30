@@ -279,3 +279,12 @@ if [[ ":AYANEO Pocket S2:AYANEO Pocket S 2K:" =~ ":$SYS_ID:" ]]; then
 
   export STEAM_DISPLAY_REFRESH_LIMITS=60
 fi
+
+if [[ ":AYN Odin 2:AYN Odin 2 Mini:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=right
+  CUSTOM_REFRESH_RATES=60
+  OUTPUT_CONNECTOR='*,DSI-1'
+  FAKE_OUTPUT_MM=177x100
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60
+fi
