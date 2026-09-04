@@ -1,7 +1,9 @@
 # This file will be sourced by gamescope-session script if not
 # overridden in ~/.config/environment.d
 
-SYS_ID="$(cat /sys/devices/virtual/dmi/id/product_name || tr -d '\0' </sys/firmware/devicetree/base/model)"
+DMI_PATH=/sys/devices/virtual/dmi/id/product_name
+DT_PATH=/sys/firmware/devicetree/base/model
+SYS_ID="$([ -f $DMI_PATH ] && cat $DMI_PATH || [ -f $DT_PATH ] && tr -d '\0' <$DT_PATH)"
 CPU_VENDOR="$(lscpu | grep "Vendor ID" | cut -d : -f 2 | xargs)"
 
 # OXP 60Hz Devices
