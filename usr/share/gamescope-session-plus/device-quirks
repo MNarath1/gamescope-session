@@ -1,7 +1,9 @@
 # This file will be sourced by gamescope-session script if not
 # overridden in ~/.config/environment.d
 
-SYS_ID="$(cat /sys/devices/virtual/dmi/id/product_name)"
+DMI_PATH=/sys/devices/virtual/dmi/id/product_name
+DT_PATH=/sys/firmware/devicetree/base/model
+SYS_ID="$([ -f $DMI_PATH ] && cat $DMI_PATH || [ -f $DT_PATH ] && tr -d '\0' <$DT_PATH)"
 CPU_VENDOR="$(lscpu | grep "Vendor ID" | cut -d : -f 2 | xargs)"
 
 # OXP 60Hz Devices
@@ -30,7 +32,6 @@ fi
 OXP_X1_LIST="ONEXPLAYER X1 i"
 if [[ ":$OXP_X1_LIST:" =~ ":$SYS_ID:"  ]]; then
   PANEL_TYPE=internal
-  USE_ROTATION_SHADER=1
   ORIENTATION=left
   CUSTOM_REFRESH_RATES=60,120
 
@@ -62,8 +63,6 @@ fi
 # OXP G1 Devices
 if [[ ":$SYS_ID:" =~ :ONEXPLAYER\ G1\ (A|i): ]]; then
   PANEL_TYPE=internal
-  # AMD version has hardware rotation
-  [[ ":$SYS_ID:" =~ ":ONEXPLAYER G1 i:" ]] && USE_ROTATION_SHADER=1
   ORIENTATION=left
   CUSTOM_REFRESH_RATES=60,144
 
@@ -193,7 +192,6 @@ fi
 # ROG Ally & ROG Ally X
 ALLY_LIST="ROG Ally RC71L_RC71L:ROG Ally RC71L:ROG Ally X RC72LA"
 if [[ ":$ALLY_LIST:" =~ ":$SYS_ID:"  ]]; then
-  PANEL_TYPE=external
   ADAPTIVE_SYNC=1
 
   # Set refresh rate range and enable refresh rate switching
@@ -240,4 +238,135 @@ if [ -f "$xg_mobile_file_path" ]; then
       export VULKAN_ADAPTER="1002:249c"
     fi
   fi
+fi
+
+if [[ ":AYANEO Pocket ACE:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=right
+  CUSTOM_REFRESH_RATES=60
+  OUTPUT_CONNECTOR='*,DSI-1'
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60
+fi
+
+if [[ ":AYANEO Pocket DMG:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=left
+  CUSTOM_REFRESH_RATES=60
+  OUTPUT_CONNECTOR='*,DSI-1'
+  FAKE_OUTPUT_MM=177x100
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60
+fi
+
+if [[ ":AYANEO Pocket DS:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=left
+  CUSTOM_REFRESH_RATES=60,120
+  # Prefer top screen
+  OUTPUT_CONNECTOR='*,DSI-1,DSI-2'
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60,120
+fi
+
+if [[ ":AYANEO Pocket EVO:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=left
+  CUSTOM_REFRESH_RATES=60,120
+  OUTPUT_CONNECTOR='*,DSI-1'
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60,120
+fi
+
+if [[ ":AYANEO Pocket S2:AYANEO Pocket S 2K:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=right
+  CUSTOM_REFRESH_RATES=60
+  OUTPUT_CONNECTOR='*,DSI-1'
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60
+fi
+
+if [[ ":AYN Odin 2:AYN Odin 2 Mini:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=right
+  CUSTOM_REFRESH_RATES=60
+  OUTPUT_CONNECTOR='*,DSI-1'
+  FAKE_OUTPUT_MM=177x100
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60
+fi
+
+if [[ ":AYN Odin 2 Portal:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=left
+  CUSTOM_REFRESH_RATES=60,120
+  OUTPUT_CONNECTOR='*,DSI-1'
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60,120
+fi
+
+if [[ ":AYN Odin 3:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=right
+  CUSTOM_REFRESH_RATES=60,120
+  OUTPUT_CONNECTOR='*,DSI-1'
+  FAKE_OUTPUT_MM=177x100
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60,120
+fi
+
+if [[ ":AYN Thor:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=right
+  CUSTOM_REFRESH_RATES=60,120
+  # Prefer top screen
+  OUTPUT_CONNECTOR='*,DSI-2,DSI-1'
+  FAKE_OUTPUT_MM=177x100
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60,120
+fi
+
+if [[ ":KONKR Pocket FIT Elite:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=right
+  OUTPUT_CONNECTOR='*,DSI-1'
+  CUSTOM_REFRESH_RATES=60,90,120,144
+  OUTPUT_MM=177x100
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60,90,120,144
+fi
+
+if [[ ":KONKR Pocket FIT:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=right
+  CUSTOM_REFRESH_RATES=144
+  OUTPUT_CONNECTOR='*,DSI-1'
+  FAKE_OUTPUT_MM=177x100
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=144
+fi
+
+if [[ ":Retroid Pocket 5:Retroid Pocket Flip2:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=left
+  CUSTOM_REFRESH_RATES=60
+  OUTPUT_CONNECTOR='*,DSI-1'
+  FAKE_OUTPUT_MM=177x100
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60
+fi
+
+if [[ ":Retroid Pocket 6:Retroid Pocket 6 TOP-DPAD:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=left
+  CUSTOM_REFRESH_RATES=60,120
+  OUTPUT_CONNECTOR='*,DSI-1'
+  FAKE_OUTPUT_MM=177x100
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60,120
+fi
+
+if [[ ":Retroid Pocket Mini:Retroid Pocket Mini V2:" =~ ":$SYS_ID:" ]]; then
+  ORIENTATION=right
+  CUSTOM_REFRESH_RATES=60
+  OUTPUT_CONNECTOR='*,DSI-1'
+  FAKE_OUTPUT_MM=65x75
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60
+fi
+
+if [[ ":Retroid Pocket Nova:" =~ ":$SYS_ID:" ]]; then
+  OUTPUT_CONNECTOR='*,DSI-1'
+  CUSTOM_REFRESH_RATES=60,120
+  FAKE_OUTPUT_MM=177x100
+
+  export STEAM_DISPLAY_REFRESH_LIMITS=60,120
 fi
