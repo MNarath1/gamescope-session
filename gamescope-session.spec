@@ -1,5 +1,5 @@
 Name:           gamescope-session
-Version:        1.1
+Version:        1.2
 Release:        1%{?dist}
 Summary:        Gamescope session plus based on Valve's gamescope
 
