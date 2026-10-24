@@ -6,7 +6,7 @@ Summary:        Gamescope session plus based on Valve's gamescope
 License:        MIT
 URL:            https://github.com/MNarath1/gamescope-session
 
-Source:        	https://github.com/MNarath1/gamescope-session/archive/refs/tags/1.1.tar.gz
+Source:        	https://github.com/MNarath1/gamescope-session/archive/refs/tags/1.2.tar.gz
 BuildArch:      noarch
 
 Requires:       gamescope
